@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.jetbrains.annotations.NotNull;
 
+// GUI Event Handler
 public class GUIEH implements Listener {
     @EventHandler
     public void onInventoryClick(@NotNull InventoryClickEvent event) {
