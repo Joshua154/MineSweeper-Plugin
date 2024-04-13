@@ -12,22 +12,24 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents the UI of the Mine Sweeper game
+ * @see IGUI
+ */
 public class MineSweeperUI implements IGUI {
     private final MineSweeperGame game;
     private final Inventory inventory;
 
     public MineSweeperUI(MineSweeperGame game) {
         this.game = game;
-        this.inventory =
-                Bukkit.createInventory(this, 9 * 6, Component.text("Mine Sweeper"));
+        this.inventory = Bukkit.createInventory(this, 6 * 9, Component.text("Mine Sweeper"));
     }
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        int x = event.getSlot() % 9;
-        int y = Math.floorDiv(event.getSlot(), 9);
+        Location location = Location.of(event.getSlot());
 
-        game.onClick(new Location(x, y), event.getClick());
+        game.onClick(location, event.getClick());
     }
 
     @Override
