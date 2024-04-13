@@ -2,20 +2,15 @@ package de.joshua.game;
 
 import de.joshua.util.Location;
 import de.joshua.util.fields.GameField;
-import de.joshua.util.fields.GameFiledType;
 import de.joshua.util.ui.IGUI;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public class MineSweeperUI implements IGUI {
     private final MineSweeperGame game;

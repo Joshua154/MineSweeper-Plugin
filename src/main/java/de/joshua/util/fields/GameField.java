@@ -25,13 +25,13 @@ class GameField {
         return type;
     }
 
-    public int getMinesAround() {
-        return minesAround;
-    }
-
     public void setType(GameFiledType gameFiledType) {
         this.type = gameFiledType;
         update();
+    }
+
+    public int getMinesAround() {
+        return minesAround;
     }
 
     public void addMineAround() {
@@ -52,22 +52,22 @@ class GameField {
         return displayItem.getItemBuilder().build();
     }
 
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
     public void setFlagged(boolean flagged) {
         isFlagged = flagged;
         update();
     }
 
-    public boolean isFlagged() {
-        return isFlagged;
+    public boolean isRevealed() {
+        return isRevealed;
     }
 
     public void setRevealed(boolean revealed) {
         isRevealed = revealed;
         update();
-    }
-
-    public boolean isRevealed() {
-        return isRevealed;
     }
 
     private void update() {
@@ -76,8 +76,7 @@ class GameField {
                 displayItem = GameFieldItemBuilders.FLAGGED;
             else
                 displayItem = GameFieldItemBuilders.HIDDEN;
-        }
-        else {
+        } else {
             switch (type) {
                 case MINE -> displayItem = GameFieldItemBuilders.MINE;
                 case EMPTY -> displayItem = GameFieldItemBuilders.getNumber(minesAround);
@@ -105,11 +104,6 @@ class GameField {
             this.itemBuilder = itemBuilder;
         }
 
-        @NotNull
-        public ItemBuilder getItemBuilder() {
-            return itemBuilder;
-        }
-
         public static GameFieldItemBuilders getNumber(int number) {
             return switch (number) {
                 case 0 -> EMPTY;
@@ -123,6 +117,11 @@ class GameField {
                 case 8 -> NUMBER_8;
                 default -> throw new IllegalStateException("Unexpected value: " + number);
             };
+        }
+
+        @NotNull
+        public ItemBuilder getItemBuilder() {
+            return itemBuilder;
         }
     }
 }
