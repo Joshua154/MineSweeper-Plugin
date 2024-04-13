@@ -1,0 +1,4 @@
+name: MineSweeper
+version: '${version}'
+main: de.joshua.MineSweeper
+api-version: '1.20'
