@@ -12,6 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * Command handler for Mine Sweeper
+ */
 public class MineSweeperCommands implements TabExecutor {
     private final MineSweeper plugin;
 
@@ -29,12 +32,16 @@ public class MineSweeperCommands implements TabExecutor {
         }
 
         switch (strings[0]) {
+            // Reconnect to a game
             case "reconnect" -> plugin.getGameManager().getGame(player).open(player);
+
+            // Start a new game
             case "start" -> {
                 if (strings.length > 4) {
                     return false;
                 }
 
+                // setting Default Settings
                 GameSettings settings = new GameSettings(9, 6, 10);
 
                 if (strings.length > 1) {

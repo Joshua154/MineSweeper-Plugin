@@ -1,5 +1,8 @@
 package de.joshua.game;
 
+/**
+ * Represents the settings of a Mine Sweeper game
+ */
 public class GameSettings {
     private int width;
     private int height;

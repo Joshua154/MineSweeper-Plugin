@@ -53,6 +53,7 @@ public class MineSweeperUI implements IGUI {
         return this.inventory;
     }
 
+    // generate the content of the inventory
     private void generateUI() {
         GameField[][] gameField = game.getGameField();
 

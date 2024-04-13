@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Main Logic of the Mine Sweeper game
+ * @see MineSweeperUI
+ * @see GameField
+ */
 public class MineSweeperGame {
     private final GameField[][] gameField;
     private final List<Location> flaggedLocations = new ArrayList<>();
@@ -31,10 +36,6 @@ public class MineSweeperGame {
         }
 
         generateMines();
-    }
-
-    public GameSettings getGameSettings() {
-        return gameSettings;
     }
 
     protected void onClick(Location clickedLocation, ClickType clickType) {
@@ -72,27 +73,9 @@ public class MineSweeperGame {
         ui.refresh();
     }
 
-    private void revealAll() {
-        for (int x = 0; x < gameSettings.width(); x++) {
-            for (int y = 0; y < gameSettings.height(); y++) {
-                gameField[x][y].setRevealed(true);
-            }
-        }
-    }
-
-    public void open(Player player) {
-        ui.open(player);
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
+    // generate the mines on the field
     public void generateMines() {
+        // generate a list of all locations
         List<Location> locations = new ArrayList<>();
         for (int x = 0; x < gameSettings.width(); x++) {
             for (int y = 0; y < gameSettings.height(); y++) {
@@ -101,10 +84,13 @@ public class MineSweeperGame {
         }
 
         Collections.shuffle(locations);
+        // select the first n locations
         List<Location> selectedLocations = locations.subList(0, gameSettings.mines());
         this.mines.clear();
         this.mines.addAll(selectedLocations);
 
+
+        // set the amount of mines around each field
         for (Location location : selectedLocations) {
             location.getAtLocation(gameField).setType(GameFiledType.MINE);
 
@@ -120,6 +106,7 @@ public class MineSweeperGame {
         }
     }
 
+    // reveal all empty fields around the clicked field recursively
     private void revealEmptyFields(Location location) {
         GameField currentField = location.getAtLocation(gameField);
         currentField.setRevealed(true);
@@ -141,11 +128,32 @@ public class MineSweeperGame {
         }
     }
 
+    // reveal all fields (loos or win)
+    private void revealAll() {
+        for (int x = 0; x < gameSettings.width(); x++) {
+            for (int y = 0; y < gameSettings.height(); y++) {
+                gameField[x][y].setRevealed(true);
+            }
+        }
+    }
+
     public boolean isValideLocation(Location location) {
         return location.getX() >= 0 && location.getX() < gameSettings.width() && location.getY() >= 0 && location.getY() < gameSettings.height();
     }
 
     public GameField[][] getGameField() {
         return gameField.clone();
+    }
+
+    public void open(Player player) {
+        ui.open(player);
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
