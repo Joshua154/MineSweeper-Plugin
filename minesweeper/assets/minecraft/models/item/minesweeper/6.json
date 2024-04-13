@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/minesweeper/6"
+  },
+	"display": {
+		"gui": {
+			"scale": [2, 2, 2]
+		}
+	}
+}
