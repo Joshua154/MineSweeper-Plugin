@@ -1,0 +1,10 @@
+# Minecraft Server files
+run/
+
+# IDE
+.idea/
+build/
+
+# Gradle
+.gradle
+gradle
