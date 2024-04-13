@@ -5,6 +5,10 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Manages the Mine Sweeper games
+ * @see MineSweeperGame
+ */
 public class MineSweeperGameManager {
     private final Map<Player, MineSweeperGame> games = new HashMap<>();
 

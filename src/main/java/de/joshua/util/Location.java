@@ -1,5 +1,6 @@
 package de.joshua.util;
 
+// Location class to represent a 2D location
 public class Location {
     private final int x;
     private final int y;
@@ -31,5 +32,17 @@ public class Location {
 
     public Location offset(int ox, int oy) {
         return new Location(x + ox, y + oy);
+    }
+
+    public static Location of(int x, int y) {
+        return new Location(x, y);
+    }
+
+    // calculate the Location from the slot in the inventory
+    public static Location of(int slotIndex) {
+        int x = slotIndex % 9;
+        int y = Math.floorDiv(slotIndex, 9);
+
+        return Location.of(x, y);
     }
 }

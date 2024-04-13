@@ -6,8 +6,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public
-class GameField {
+// Represents a field in the game
+public class GameField {
     private GameFiledType type;
     private boolean isFlagged;
     private boolean isRevealed = false;
@@ -21,6 +21,7 @@ class GameField {
         update();
     }
 
+    // Getters and setters
     public GameFiledType getType() {
         return type;
     }
@@ -70,6 +71,7 @@ class GameField {
         update();
     }
 
+    // Update the display item
     private void update() {
         if (!isRevealed) {
             if (isFlagged)
@@ -84,6 +86,7 @@ class GameField {
         }
     }
 
+    // Enum to represent the different types of items in the game field
     public enum GameFieldItemBuilders {
         MINE(new ItemBuilder(Material.TNT).displayName(Component.text("Mine"))),
         NUMBER_1(new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).displayName(Component.text("1")).customModelData(1)),
