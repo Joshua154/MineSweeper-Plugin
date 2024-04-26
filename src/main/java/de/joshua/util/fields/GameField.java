@@ -88,7 +88,7 @@ public class GameField {
 
     // Enum to represent the different types of items in the game field
     public enum GameFieldItemBuilders {
-        MINE(new ItemBuilder(Material.TNT).displayName(Component.text("Mine"))),
+        MINE(new ItemBuilder(Material.TNT).displayName(Component.translatable("microgames.minesweeper.mine"))),
         NUMBER_1(new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).displayName(Component.text("1")).customModelData(1)),
         NUMBER_2(new ItemBuilder(Material.GREEN_STAINED_GLASS_PANE).displayName(Component.text("2")).customModelData(1)),
         NUMBER_3(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).displayName(Component.text("3")).customModelData(1)),
@@ -98,7 +98,7 @@ public class GameField {
         NUMBER_7(new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).displayName(Component.text("7")).customModelData(1)),
         NUMBER_8(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).displayName(Component.text("8")).customModelData(1)),
         HIDDEN(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).displayName(Component.text("")).customModelData(1)),
-        FLAGGED(new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).displayName(Component.text("Flagged")).customModelData(1)),
+        FLAGGED(new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).displayName(Component.translatable("microgames.minesweeper.flag")).customModelData(1)),
         EMPTY(new ItemBuilder());
 
         private final ItemBuilder itemBuilder;
