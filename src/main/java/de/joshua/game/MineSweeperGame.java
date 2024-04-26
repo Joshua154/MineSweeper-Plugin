@@ -1,5 +1,6 @@
 package de.joshua.game;
 
+import de.joshua.MineSweeper;
 import de.joshua.util.Location;
 import de.joshua.util.fields.GameField;
 import de.joshua.util.fields.GameFiledType;
@@ -17,6 +18,7 @@ import java.util.List;
  * @see GameField
  */
 public class MineSweeperGame {
+    private final MineSweeper mineSweeper;
     private final GameField[][] gameField;
     private final List<Location> flaggedLocations = new ArrayList<>();
     private final List<Location> mines = new ArrayList<>();
@@ -25,7 +27,8 @@ public class MineSweeperGame {
     private Player player;
     private boolean isRunning = true;
 
-    public MineSweeperGame(GameSettings gameSettings) {
+    public MineSweeperGame(MineSweeper mineSweeper, GameSettings gameSettings) {
+        this.mineSweeper = mineSweeper;
         this.gameSettings = gameSettings;
         this.gameField = new GameField[gameSettings.width()][gameSettings.height()];
 
@@ -47,11 +50,13 @@ public class MineSweeperGame {
             if (clickedField.isFlagged()) return;
 
             if (clickedField.getType() == GameFiledType.MINE) {
-                player.sendMessage(Component.text("You lost!"));
-                revealAll();
-                isRunning = false;
+//                player.sendMessage(Component.text("You lost!"));
+//                revealAll();
+//                isRunning = false;
+//
+//                ui.refresh();
 
-                ui.refresh();
+                mineSweeper.getConnector().finishSingleplayer(mineSweeper.getGameHandler(), player, false);
                 return;
             }
 
@@ -63,9 +68,11 @@ public class MineSweeperGame {
             clickedField.setFlagged(!clickedField.isFlagged());
 
             if (flaggedLocations.size() == gameSettings.mines() && mines.stream().allMatch(mine -> mine.getAtLocation(gameField).isFlagged())) {
-                player.sendMessage(Component.text("You won!"));
-                isRunning = false;
-                revealAll();
+//                player.sendMessage(Component.text("You won!"));
+//                isRunning = false;
+//                revealAll();
+                mineSweeper.getConnector().finishSingleplayer(mineSweeper.getGameHandler(), player, true);
+                return;
             }
         }
 
@@ -155,5 +162,9 @@ public class MineSweeperGame {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public MineSweeper getMineSweeper() {
+        return mineSweeper;
     }
 }

@@ -1,9 +1,11 @@
 package de.joshua.game;
 
+import de.joshua.MineSweeper;
 import de.joshua.util.Location;
 import de.joshua.util.fields.GameField;
 import de.joshua.util.ui.IGUI;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -22,7 +24,7 @@ public class MineSweeperUI implements IGUI {
 
     public MineSweeperUI(MineSweeperGame game) {
         this.game = game;
-        this.inventory = Bukkit.createInventory(this, 6 * 9, Component.text("Mine Sweeper"));
+        this.inventory = Bukkit.createInventory(this, 6 * 9, Component.translatable("microgames.minesweeper.gui-title"));
     }
 
     @Override
@@ -40,7 +42,13 @@ public class MineSweeperUI implements IGUI {
 
     @Override
     public void onClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+        MineSweeper mineSweeper = game.getMineSweeper();
 
+        if(!mineSweeper.getGameManager().hasGame(player)) return;
+        mineSweeper.getConnector().cancelGame(game.getMineSweeper().getGameHandler(), player, () -> {
+            mineSweeper.getGameManager().getGame(player).open(player);
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.joshua.game;
 
+import de.joshua.MineSweeper;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -12,8 +13,8 @@ import java.util.Map;
 public class MineSweeperGameManager {
     private final Map<Player, MineSweeperGame> games = new HashMap<>();
 
-    public void createGame(Player player, GameSettings gameSettings) {
-        MineSweeperGame game = new MineSweeperGame(gameSettings);
+    public void createGame(MineSweeper mineSweeper, Player player, GameSettings gameSettings) {
+        MineSweeperGame game = new MineSweeperGame(mineSweeper, gameSettings);
         game.setPlayer(player);
         game.open(player);
 
@@ -21,7 +22,7 @@ public class MineSweeperGameManager {
     }
 
     public void removeGame(Player player) {
-        games.remove(player);
+        if (hasGame(player)) games.remove(player);
     }
 
     public MineSweeperGame getGame(Player player) {
