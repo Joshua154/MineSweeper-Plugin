@@ -2,15 +2,10 @@ buildscript {
     repositories {
         gradlePluginPortal()
     }
-    dependencies {
-        classpath "com.github.johnrengelman:shadow:8.1.1"
-    }
 }
 
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.2.0"
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'de'
@@ -19,17 +14,17 @@ version = '1.0'
 repositories {
     mavenCentral()
     maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
+        name "gitea"
+        url "https://git.tjcserver.net/api/packages/Packages/maven/"
+        authentication { header(HttpHeaderAuthentication) }
+        credentials(HttpHeaderCredentials)
     }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
+    maven { url = "https://repo.thejocraft.net/public/" }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly 'de.pianoman911:microgames:1.0.27'
 }
 
 def targetJavaVersion = 17
@@ -58,23 +53,3 @@ processResources {
         expand props
     }
 }
-
-tasks {
-    runServer {
-        downloadPlugins {
-            github("ViaVersion", "ViaVersion", "4.9.3", "ViaVersion-4.9.3.jar")
-            github("ViaVersion", "ViaBackwards", "4.9.2", "ViaBackwards-4.9.2.jar")
-        }
-        minecraftVersion("1.20.4")
-    }
-}
-
-//tasks.register("copyToServer"){
-//    dependsOn shadowJar
-//    doLast {
-//        copy {
-//            from shadowJar
-//            into "run/plugins"
-//        }
-//    }
-//}
